@@ -1,6 +1,5 @@
 package ConjuntoResidencial;
 
-
 public class Casa {
     
     //Atributos
@@ -35,9 +34,10 @@ public class Casa {
         this.numeroCasa = numeroCasa;
     }
 
+
     @Override
     public String toString() {
-        return "Casa "+ numeroCasa +"de" + contadorCasas +  "\n"+"La direccion de la casa es-> " + direccion +"\n"+ "el nombre del propietario es-> "+ nombrePropietario;
+        return "Casa "+ numeroCasa +" de "+ Casa.contadorCasas+ "\n"+"La direccion de la casa es-> " + direccion +"\n"+ "el nombre del propietario es-> "+ nombrePropietario;
     }
 
     

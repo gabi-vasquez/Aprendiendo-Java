@@ -12,6 +12,7 @@ public class mainCasa {
         boolean salir = false;
         String direccion = "";
         String nombrePropietario = "";
+        int id = 0;
 
         do {
             String option = JOptionPane.showInputDialog(null, """
@@ -20,7 +21,7 @@ public class mainCasa {
                     2-> Mostrar todos las casas
                     3-> Actualizar una casa
                     4-> Eliminar una casa
-                    5-> Para salir
+                    0-> Para salir
                     """);
             int opcion = Integer.parseInt(option);
 
@@ -29,26 +30,26 @@ public class mainCasa {
                     direccion = JOptionPane.showInputDialog("Ingresa la direccion de la casa");
                     nombrePropietario = JOptionPane.showInputDialog("Ingresa el nombre del propietario de la casa");
                     Casa.contadorCasas++;
-                    Casa casa = new Casa(Casa.contadorCasas,direccion, nombrePropietario);
+                    id++;
+                    Casa casa = new Casa(id, direccion, nombrePropietario);
                     casas.add(casa);
                     break;
 
                 case 2:
                     String informacion = "";
-                    Casa.contadorCasas = 0;
+
                     for (int i = 0; i < casas.size(); i++) {
-                        Casa.contadorCasas++;
-                        informacion +=  casas.get(i).toString() + "\n";
+                        informacion += casas.get(i).toString() + "\n";
                     }
+
                     JOptionPane.showMessageDialog(null, informacion);
                     break;
 
                 case 3:
                     String casaActualizar = JOptionPane.showInputDialog("Ingresa el numero de la casa a actualizar");
                     int numeroCasa = Integer.parseInt(casaActualizar);
-                    for (int i = 0; i < casas.size(); i++) {
-                        int buscar = numeroCasa - 1;
-                        if (buscar == i) {
+                    for (int i = 0; i < casas.size(); i++){
+                        if (casas.get(i).getNumeroCasa() == numeroCasa) {
                             JOptionPane.showMessageDialog(null, casas.get(i).toString());
                             String valorActualiza = JOptionPane.showInputDialog("Ingresa lo que quieres actualizar"
                                     + "\n" + "1-> Direccion " + "\n" + "2-> Nombre del propietario");
@@ -61,6 +62,7 @@ public class mainCasa {
                                 String actualizacion = JOptionPane
                                         .showInputDialog("Ingresa el nombre de propietario a actualizar");
                                 casas.get(i).setNombrePropietario(actualizacion);
+                                
                             }
 
                         }
@@ -70,12 +72,21 @@ public class mainCasa {
                 case 4:
                     String eliminarCasa = JOptionPane.showInputDialog(
                             "Ingresa la casa a eliminar");
-                    int posicion = Integer.parseInt(eliminarCasa);
-                    posicion -= 1;
-                    casas.remove(posicion);
+                    int numeroCasaEliminar = Integer.parseInt(eliminarCasa);
+                    boolean encontrado = false;
+                    for(int i = 0; i < casas.size();i++){
+                        if(casas.get(i).getNumeroCasa() == numeroCasaEliminar){
+                            casas.remove(i);
+                            encontrado = true;
+                        }
+                    }
+                    if(encontrado == false){
+                        JOptionPane.showMessageDialog(null, "Casa no encontrada");
+                    }
+                    Casa.contadorCasas--;
                     break;
 
-                case 5:
+                case 0:
                     salir = true;
                     break;
 
