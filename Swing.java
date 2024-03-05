@@ -2,7 +2,6 @@
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import Arraylist.String;
 
 public class Swing extends JFrame{
     public static void main(String[] args) {
